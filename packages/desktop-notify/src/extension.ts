@@ -9,14 +9,12 @@
  */
 
 import type { ExtensionAPI } from "@mariozechner/pi-coding-agent";
-import { canTrackTerminalFocus, startFocusTracking, stopFocusTracking } from "./focus.js";
+import { startFocusTracking, stopFocusTracking } from "./focus.js";
 import { sendNotification } from "./notify.js";
 import { captureWindowId } from "./window.js";
 
 export default function (pi: ExtensionAPI) {
 	pi.on("session_start", async (_event, _ctx) => {
-		if (!canTrackTerminalFocus()) return;
-
 		startFocusTracking();
 		await captureWindowId();
 	});
